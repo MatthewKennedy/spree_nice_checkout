@@ -1,0 +1,105 @@
+<% address_id = address_type.chars.first %>
+<div class="inner address-form-conatiner" data-hook=<%="#{address_type}_inner" %> <% if address_type == 'shipping' %>style="display: none;"<% end %> >
+
+ <div class="has-float-label" id=<%="#{address_id}firstname" %>>
+    <%= form.text_field :firstname, placeholder: "#{Spree.t(:first_name)}", class: 'form-control', required: true %>
+    <%= form.label :firstname do %>
+      <%= Spree.t(:first_name) %><abbr class="required" title="required">*</abbr>
+    <% end %>
+  </div>
+
+  <div class="has-float-label" id=<%="#{address_id}lastname" %>>
+    <%= form.text_field :lastname, placeholder: "#{Spree.t(:last_name)}", class: 'form-control', required: true %>
+    <%= form.label :lastname do %>
+      <span><%= Spree.t(:last_name) %><abbr class="required" title="required">*</abbr></span>
+    <% end %>
+  </div>
+
+  <% if Spree::Config[:company] %>
+    <div class="has-float-label address-full-width" id=<%="#{address_id}company" %>>
+      <%= form.text_field :company, placeholder: "#{Spree.t(:company)}", class: 'form-control' %>
+      <%= form.label :company do %>
+          <span><%= Spree.t(:company) %></span>
+      <% end %>
+    </div>
+  <% end %>
+    <div class="has-float-label address-full-width" id=<%="#{address_id}address1" %>>
+      <%= form.text_field :address1, placeholder: "#{Spree.t(:street_address)}", class: 'form-control', required: true %>
+      <%= form.label :address1 do %>
+         <span><%= Spree.t(:street_address) %><abbr class="required" title="required">*</abbr></span>
+      <% end %>
+    </div>
+
+    <div class="has-float-label address-full-width" id=<%="#{address_id}address2" %>>
+      <%= form.text_field :address2, placeholder: "#{Spree.t(:street_address_2)}", class: 'form-control' %>
+      <%= form.label :address2 do %>
+        <span><%= Spree.t(:street_address_2) %></span>
+      <% end %>
+    </div>
+
+    <div class="has-float-label address-full-width" id=<%="#{address_id}city" %>>
+     <%= form.text_field :city, placeholder: "#{Spree.t(:city)}", class: 'form-control', required: true %>
+      <%= form.label :city do %>
+       <span><%= Spree.t(:city) %><abbr class="required" title="required">*</abbr></span>
+     <% end %>
+    </div>
+
+<% have_states = !address.country.states.empty? %>
+<div id="country_conatiner" class="address-full-width with-state">
+  <div class="selector-has-float-label" id=<%="#{address_id}country" %>>
+    <%= form.label :country_id do %>
+      <span class="selector-label"><%= Spree.t(:country) %><abbr class="required" title="required">*</abbr></span>
+    <% end %>
+     <span id=<%="#{address_id}country-selection" %>>
+      <%= form.collection_select :country_id, available_countries, :id, :name, {}, { class: 'form-cont', required: true } %>
+    </span>
+  </div>
+
+  <% if Spree::Config[:address_requires_state] %>
+    <div class="selector-has-float-label" id=<%="#{address_id}state" %>>
+
+
+      <%== state_elements = [
+      form.collection_select(:state_id, address.country.states,
+                         :id, :name,
+                         {include_blank: true},
+                         {class: have_states ? 'form-cont' : 'form-cont hidden',
+                         required: have_states,
+                         disabled: !have_states}) +
+      form.text_field(:state_name,
+                         class: !have_states ? 'form-cont' : 'form-cont hidden',
+                         placeholder: "state_name",
+                         required: !have_states,
+                         disabled: have_states)
+      ].join.gsub('"', "'").gsub("\n", "")
+      %>
+      <%= form.label :state do %>
+      <span class="selector-label"><%= Spree.t(:state) %><abbr class='required' title="required" id=<%="#{address_id}state-required"%>>*</abbr></span>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="has-float-label" id=<%="#{address_id}zipcode" %>>
+    <%= form.text_field :zipcode, placeholder: "#{Spree.t(:zip)}", class: 'form-control', required: address.require_zipcode? %>
+    <%= form.label :zipcode do %>
+      <span><%= Spree.t(:zip) %><% if address.require_zipcode? %><abbr class="required" title="required">*</abbr><% end %></span>
+    <% end %>
+  </div>
+  <noscript>
+    <%= form.text_field :state_name, class: 'form-control', required: true %>
+  </noscript>
+
+</div>
+  <div class="has-float-label address-full-width" id=<%="#{address_id}phone" %>>
+    <%= form.phone_field :phone, placeholder: "#{Spree.t(:phone)}", class: 'form-control', required: address.require_phone? %>
+    <%= form.label :phone do %>
+     <span><%= Spree.t(:phone) %><% if address.require_phone? %><abbr class="required" title="required">*</abbr><% end %></span>
+    <% end %>
+  </div>
+  <% if Spree::Config[:alternative_shipping_phone] %>
+    <div id=<%="#{address_id}altphone" %>>
+      <%= form.label :alternative_phone, Spree.t(:alternative_phone) %>
+      <%= form.phone_field :alternative_phone, class: 'form-control' %>
+    </div>
+  <% end %>
+</div>

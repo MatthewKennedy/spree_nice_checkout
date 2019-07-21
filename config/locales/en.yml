@@ -1,0 +1,17 @@
+en:
+  spree:
+    continue_to_delivery: Continue to delivery
+    continue_to_payment: Continue to payment
+    return_to_cart: Return to cart
+    return_to_address: Return to address
+    return_to_delivery: Return to delivery
+    in_taxes: in taxes
+    inclides: includes
+    accepts_marketing_emails: Keep me up to date on news and exclusive offers
+    use_billing_address: Use billing address for delivery
+    coupon_code: Enter your discont code
+    change: Change
+    contact: Contact
+    ship_to: Ship to
+    method: Method
+    purchase: Pay now
