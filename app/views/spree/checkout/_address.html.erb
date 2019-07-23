@@ -1,7 +1,7 @@
 <div class="checkbox">
   <%= fields_for try_spree_current_user, url: update_marketing_preferences_path, method: :put, remote: true do |d| %>
     <%= d.check_box :accepts_marketing_emails %>
-    <%= d.label :accepts_marketing_emails, Spree.t(:accepts_marketing_emails) %>
+    <%= d.label :accepts_marketing_emails, Spree.t(:accepts_marketing_emails).html_safe %>
   <% end %>
 </div>
 
@@ -33,11 +33,11 @@
   <% end %>
 </div>
 
-<div class="grid-two-col">
-  <div class="items-center">
+<div class="back-or-contiue-buttons">
+  <div class="back">
     <span class="go-back"><a href='<%= spree.cart_path %>'> <%= Spree.t(:return_to_cart) %></a></span>
   </div>
-  <div>
+  <div class="continue">
      <%= submit_tag Spree.t(:continue_to_delivery), class: 'btn btn-success btn-block checkout-button' %>
   </div>
 </div>

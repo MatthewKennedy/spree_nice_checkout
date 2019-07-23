@@ -7,7 +7,7 @@ en:
     return_to_delivery: Return to delivery
     in_taxes: in taxes
     inclides: includes
-    accepts_marketing_emails: Keep me up to date on news and exclusive offers
+    accepts_marketing_emails: Keep me up to date <span class='small_hide'>on news & exclusive offers<span>
     use_billing_address: Use billing address for delivery
     coupon_code: Enter your discont code
     change: Change

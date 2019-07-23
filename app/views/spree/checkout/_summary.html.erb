@@ -36,9 +36,9 @@
       <%= form_for @order, url: update_checkout_path(@order.state), html: { id: "coupon_code" }, remote: true do |form| %>
       <div class="grid" id="discount-apply">
           <div class="form-group has-float-label">
-            <%= form.text_field :coupon_code, placeholder: "#{Spree.t(:coupon_code)}", class: 'form-control', style: 'width:67%; margin-right:3%; float:left;' %>
+            <%= form.text_field :coupon_code, placeholder: "#{Spree.t(:coupon_code)}", class: 'form-control', id: 'coupon_box' %>
             <%= form.label Spree.t(:coupon_code) %>
-            <%= button_tag Spree.t(:coupon_code_apply), class: 'btn btn-default', style: 'width:30%; float:left;' %>
+            <%= button_tag Spree.t(:coupon_code_apply), class: 'btn btn-default', id: 'coupon_button' %>
           </div>
       </div>
       <% end %>
