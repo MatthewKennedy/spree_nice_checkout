@@ -1,46 +1,63 @@
 <% @body_id = 'checkout-page' %>
+<div id="mobile-logo">
+  <div style='max-width:140px; margin: 0px auto 5px; text-align:center;'>
+    <%= logo %>
+  </div>
+</div>
 <div id="checkout-main">
-  <div id="checkout-header">
-    <div style='max-width:140px; margin: 0px auto 5px; text-align:center;'>
-      <%= logo %>
+  <div id="inner-section-right">
+      <div id="checkout-header">
+        <div style='max-width:140px; margin: 0px auto 5px; text-align:center;'>
+          <%= logo %>
+        </div>
+      </div>
+      <div id="checkout-progress" data-hook="checkout_header">
+        <%= checkout_progress %>
+      </div>
+
+      <%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
+      <%= form_for @order, url: update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form| %>
+
+    <% if @order.state == 'address' || !@order.email? %>
+      <% if spree_current_user %>
+      <div>
+        <h4><%= Spree.t(:contact_information) %></h4>
+        <span class="grey"><%= @order.name %> (<%= @order.email%>) <%= link_to Spree.t(:logout), spree.logout_path %></span>
+      </div>
+      <% else %>
+        <div class="contact_login">
+          <h4 class="_fr2"><%= Spree.t(:contact_information) %></h4>
+          <span class="text-right grey"><%= Spree.t(:already_have_an_acount) %> <%= link_to Spree.t(:login), spree.registration_path %></span>
+        </div>
+        <div class="has-float-label">
+          <%= form.email_field :email, placeholder: "#{Spree.t(:email)}", class: 'form-control', required: true %>
+          <%= form.label :email %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= form.hidden_field :state_lock_version %>
+      <%= render @order.state, form: form %>
+    <% end %>
+
+      <div id="checkout-footer">
+        <ul class="policy-list">
+              <li class="policy-list__item">
+                <a aria-haspopup="dialog" data-modal="policy-992873" data-title-text="Refund policy" data-close-text="Close" data-iframe="true" href="/2676031/policies/992873.html">Refund policy</a>
+              </li>
+              <li class="policy-list__item">
+                <a aria-haspopup="dialog" data-modal="policy-992875" data-title-text="Privacy policy" data-close-text="Close" data-iframe="true" href="/2676031/policies/992875.html">Privacy policy</a>
+              </li>
+              <li class="policy-list__item">
+                <a aria-haspopup="dialog" data-modal="policy-992877" data-title-text="Terms of service" data-close-text="Close" data-iframe="true" href="/2676031/policies/992877.html">Terms of service</a>
+              </li>
+          </ul>
+      </div>
     </div>
-  </div>
-  <div id="checkout-progress" data-hook="checkout_header">
-    <%= checkout_progress %>
-  </div>
-
-  <%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
-  <%= form_for @order, url: update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form| %>
-
-  <% if @order.state == 'address' || !@order.email? %>
-  <h4><%= Spree.t(:contact_information) %></h4>
-    <div class="has-float-label">
-      <%= form.email_field :email, placeholder: "#{Spree.t(:email)}", class: 'form-control', required: true %>
-      <%= form.label :email %>
-    </div>
-  <% end %>
-
-  <%= form.hidden_field :state_lock_version %>
-    <%= render @order.state, form: form %>
-  <% end %>
-
-  <div id="checkout-footer">
-    <ul class="policy-list">
-          <li class="policy-list__item">
-            <a aria-haspopup="dialog" data-modal="policy-992873" data-title-text="Refund policy" data-close-text="Close" data-iframe="true" href="/2676031/policies/992873.html">Refund policy</a>
-          </li>
-          <li class="policy-list__item">
-            <a aria-haspopup="dialog" data-modal="policy-992875" data-title-text="Privacy policy" data-close-text="Close" data-iframe="true" href="/2676031/policies/992875.html">Privacy policy</a>
-          </li>
-          <li class="policy-list__item">
-            <a aria-haspopup="dialog" data-modal="policy-992877" data-title-text="Terms of service" data-close-text="Close" data-iframe="true" href="/2676031/policies/992877.html">Terms of service</a>
-          </li>
-      </ul>
-  </div>
 </div>
 
 <% if @order.state != 'confirm' %>
-    <div id="checkout-summary" data-hook="checkout_summary_box">
+    <div id="checkout-summary" class="js-badger-accordion" data-hook="checkout_summary_box">
           <%= render partial: 'summary', locals: { order: @order } %>
     </div>
 <% end %>
@@ -48,4 +65,7 @@
 <script>
   Spree.current_order_id = "<%= @order.number %>"
   Spree.current_order_token = "<%= @order.token %>"
+  
+  new BadgerAccordion('.js-badger-accordion', {
+  });
 </script>

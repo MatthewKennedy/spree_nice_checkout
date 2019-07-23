@@ -806,23 +806,3 @@ function () {
 return BadgerAccordion;
 
 })));
-
-
-Spree.ready(function ($) {
-      $('#coupon_code').submit(function (event) {
-        var input = {
-          couponCodeField: $('#order_coupon_code'),
-          couponStatus: $('#coupon_status')
-        }
-        if ($.trim(input.couponCodeField.val()).length > 0) {
-          // eslint-disable-next-line no-undef
-          if (new CouponManager(input).applyCoupon()) {
-            return true
-          } else {
-            Spree.enableSave()
-            event.preventDefault()
-            return false
-          }
-        }
-      })
-})
