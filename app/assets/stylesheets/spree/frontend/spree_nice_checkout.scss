@@ -749,6 +749,9 @@ body#checkout-page {
     div#mobile-logo{
       display: none;
     }
+    dt#accordion_show_hide{
+      display: none;
+    }
 
 
 
@@ -760,6 +763,12 @@ body#checkout-page {
 
 @media only screen and (max-width: 999px) {
   body#checkout-page {
+
+      dt#accordion_show_hide{
+        display: grid;
+        max-width: 560px;
+        margin: auto;
+      }
 
       div#mobile-logo{
         display: grid;
@@ -774,7 +783,7 @@ body#checkout-page {
         grid-row: 2;
         background: $almost-white--background;
         background-color: $almost-white--background;
-          padding: 15px;
+        padding: 15px;
         width:100%;
         border-top: 1px solid $color-border;
         border-bottom: 1px solid $color-border;
@@ -783,7 +792,7 @@ body#checkout-page {
       div#checkout-summary-inner {
         display: grid;
         max-width: 560px;
-        margin: auto;
+        margin: 35px auto;
       }
 
       div#checkout-main {
@@ -803,6 +812,18 @@ body#checkout-page {
         display: none;
       }
 
+      .with-state {
+        display: grid;
+        grid-template-columns:1fr;
+        grid-gap: 10px;
+      }
+
+      .without-state {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+      }
+
       .badger-accordion__panel {
         max-height: 75vh;
         overflow: hidden;
@@ -815,19 +836,30 @@ body#checkout-page {
         .badger-accordion--initalised & { transition: max-height ease-in-out 0.2s; }
       }
 
-      .js-badger-accordion-header{
-        color:#007aff;
-        padding: 10px 0 5px 0;
-        text-align: right;
-      }
 
-      .-ba-is-active .badger-accordion__trigger-icon {
-        -webkit-transform: scaleY(-1);
-        transform: scaleY(-1);
+      .js-badger-accordion-header{
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        align-items: center;
+        color:$link-color;
+        padding: 5px 0;
+        text-align: left;
+
+        h4 {
+          font-weight: 300;
+        }
+
       }
 
       .hide-summary {
         display: none;
+      }
+
+      .chevron:after{
+        content: asset-data-url('chevron-down');
+        display: inline-block;
+        width: 13px;
+        margin: 0 0 0 10px;
       }
 
       .-ba-is-active .show-summary {
@@ -836,6 +868,11 @@ body#checkout-page {
 
       .-ba-is-active .hide-summary {
         display: inline;
+      }
+
+      .-ba-is-active .chevron:after{
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
       }
 
       .badger-accordion--initialized .badger-accordion__panel {

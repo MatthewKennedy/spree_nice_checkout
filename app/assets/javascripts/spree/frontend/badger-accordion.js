@@ -748,7 +748,7 @@ function () {
     key: "calculatePanelHeight",
     value: function calculatePanelHeight(panel) {
       var panelInner = panel.querySelector(this.settings.panelInnerClass);
-      var activeHeight = panelInner.offsetHeight;
+      var activeHeight = panelInner.offsetHeight + 40;
       return panel.style.maxHeight = "".concat(activeHeight, "px");
     }
     /**
