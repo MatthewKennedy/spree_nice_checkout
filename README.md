@@ -1,4 +1,4 @@
-# SpreeNiceCheckout
+# Spree Nice Checkout
 
 This Spree extension adds a Shopify style checkout to your Spree 3.7 store. Why?
 - If you have recently moved from Shopify your existing customers won't notice a huge change.
