@@ -39,7 +39,7 @@ ShippingTotalManager.prototype.bindEvent = function () {
 
 Spree.ready(function ($) {
   var input = {
-    orderTotal: $('#summary-order-total'),
+    orderTotal: $('.order-total'),
     shipmentTotal: $('[data-hook="shipping-total"]'),
     shippingMethods: $('input[data-behavior="shipping-method-selector"]')
   }

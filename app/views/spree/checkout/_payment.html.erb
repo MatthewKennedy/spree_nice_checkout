@@ -1,37 +1,4 @@
 <div id="payment" data-hook='payment_wrapper'>
-  <div id="checkout-so-far">
-    <div class="tag grey">
-      <%= Spree.t(:contact) %>
-    </div>
-    <div class="info">
-      <%= @order.email%>
-    </div>
-    <div class="link text-right">
-      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
-    </div>
-    <span class="fw border-top"></span>
-    <div class="tag grey">
-      <%= Spree.t(:ship_to) %>
-    </div>
-    <div class="info ">
-      <%= @order.billing_address.address1 %>, <%= @order.billing_address.city %>, <%= @order.billing_address.zipcode %>, <%= @order.billing_address.country %>
-    </div>
-    <div class="link text-right">
-      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
-    </div>
-    <span class="fw border-top"></span>
-    <div class="tag grey">
-      <%= Spree.t(:method) %>
-    </div>
-    <div class="info ">
-      <% @order.shipments.each do |shipment| %>
-      <%= shipment.shipping_method.name %>
-      <% end %>
-    </div>
-    <div class="link text-right">
-      <%= link_to Spree.t(:change), spree.checkout_state_path('delivery') %>
-    </div>
-  </div>
 
   <div data-hook="checkout_payment_step">
     <% if @payment_sources.present? %>
@@ -65,7 +32,6 @@
         </p>
       </div>
     <% end %>
-
 
   <%= render partial: 'spree/checkout/payment/storecredit' %>
  <div id="payment-options" class="spree-well">

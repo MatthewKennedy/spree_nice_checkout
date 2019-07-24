@@ -1,26 +1,3 @@
-
-<div id="checkout-so-far">
-  <div class="tag grey">
-    <%= Spree.t(:contact) %>
-  </div>
-  <div class="info">
-    <%= @order.email%>
-  </div>
-  <div class="link text-right">
-    <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
-  </div>
-  <span class="fw border-top"></span>
-  <div class="tag grey">
-    <%= Spree.t(:ship_to) %>
-  </div>
-  <div class="info ">
-    <%= @order.shipping_address.address1 %>, <%= @order.shipping_address.city %>, <%= @order.shipping_address.zipcode %>, <%= @order.shipping_address.country %>
-  </div>
-  <div class="link text-right">
-    <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
-  </div>
-</div>
-
 <div id='shipping_method' data-hook>
  <div data-hook="shipping_method_inner">
    <div id="methods">

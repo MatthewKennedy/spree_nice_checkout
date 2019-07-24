@@ -14,6 +14,9 @@ $button-corner-radius: $corner-radius;
 $colum-padding:80px 40px 0 40px;
 
 
+
+
+
 /*============================================================================
   Prefix mixin for generating vendor prefixes.
   Based on https://github.com/thoughtbot/bourbon/blob/v4-stable/app/assets/stylesheets/addons/_prefixer.scss
@@ -164,10 +167,17 @@ body#checkout-page {
     }
 
 
+    .alert-danger,  .alert-error, .alert-success {
+      background-color: transparent;
+      border: none;
+    }
     .alert-danger,  .alert-error {
       color: #a94442;
-      background-color: transparent;
-      border-color: #ebccd1;
+    }
+
+
+    #coupon_status {
+      font-size: 16px;
     }
 
     img{max-width: 100%;}
@@ -382,7 +392,7 @@ body#checkout-page {
     }
 
     div#checkout-so-far {
-      margin-bottom: 45px;
+      margin-bottom: 25px;
     }
 
     ul#payment-method-fields, ul#shipping_methods {
@@ -610,7 +620,7 @@ body#checkout-page {
         -moz-appearance:textfield;
     }
 
-    input[type=text]:focus, input[type=email]:focus, input[type=tel]:focus,  select:focus{
+    input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=tel]:focus,  select:focus{
         outline: none;
         border-color: $link-color;
         -webkit-box-shadow: 0 0 0 2px $link-color;
@@ -741,12 +751,17 @@ body#checkout-page {
         transform: scale(1);
     }
 
-    #coupon_box{
+    #coupon_box, #coupon_box_pay {
       width:77%;
       margin-right:3%;
       float:left;
     }
-    #coupon_button {
+
+    #payment_additional_discount_box {
+      display: none;
+    }
+
+    .coupon_button {
       width:20%;
       float:left;
     }
@@ -757,20 +772,25 @@ body#checkout-page {
       display: none;
     }
 
+    .large_show_grid {
+     display: grid;
+    }
+
 
 
 }
 
-
-
-@media only screen and (max-width: 550px) {
-      .small_hide {
-       display: none;
-     }
-}
 
 @media only screen and (max-width: 999px) {
   body#checkout-page {
+
+    #payment_additional_discount_box {
+      display: grid;
+    }
+
+      .medium_down_hide {
+       display: none;
+      }
 
       dt#accordion_show_hide{
         display: grid;
@@ -862,6 +882,8 @@ body#checkout-page {
 
         h4 {
           font-weight: 300;
+          position: relative;
+
         }
 
       }
@@ -883,11 +905,18 @@ body#checkout-page {
       }
 
 
-      .chevron:after{
+      .chevron:after {
         content: asset-data-url('chevron-down');
-        display: inline-block;
-        width: 13px;
-        margin: 0 0 0 10px;
+        display: inline-grid;
+        width: 12px;
+        margin-right:6px;
+        transition: all ease-in-out 0.2s;
+      }
+
+      .-ba-is-active .chevron:after {
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+        transition: all ease-in-out 0.2s;
       }
 
       .-ba-is-active .show-summary {
@@ -898,10 +927,7 @@ body#checkout-page {
         display: inline;
       }
 
-      .-ba-is-active .chevron:after{
-        -webkit-transform: scaleY(-1);
-        transform: scaleY(-1);
-      }
+
 
       .badger-accordion--initialized .badger-accordion__panel {
         transition: all ease-in-out 0.2s;
@@ -912,4 +938,15 @@ body#checkout-page {
       }
 
   }
+}
+
+
+@media only screen and (max-width: 550px) {
+  body#checkout-page {
+
+      .small_hide {
+       display: none;
+     }
+
+   }
 }

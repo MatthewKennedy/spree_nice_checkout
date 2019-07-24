@@ -1,10 +1,15 @@
 <dt id="accordion_show_hide">
   <div class="js-badger-accordion-header">
     <div class="text-left badger-accordion__trigger-title">
-      <h4  style="margin:0; cursor: pointer;"><span class="show-summary"><%= Spree.t(:show) %></span> <span class="hide-summary"><%= Spree.t(:hide) %></span> <%= Spree.t(:order_summary) %><span class="chevron"></span></h4>
+      <h4  style="margin:0; cursor: pointer;">
+        <span class="chevron"></span>
+          <span class="show-summary"><%= Spree.t(:show) %></span>
+          <span class="hide-summary"><%= Spree.t(:hide) %></span>
+          <%= Spree.t(:order_summary) %>
+      </h4>
     </div>
     <div class="text-right">
-      <h4 class="" style="margin:0; cursor: pointer;"><strong><%= order.display_total.to_html %></strong></h4>
+      <h4 style="margin:0; cursor: pointer;"><strong><span class="order-total"><%= order.display_total.to_html %><span></strong></h4>
     </div>
   </div>
 </dt>
@@ -33,16 +38,17 @@
         <% end %>
     </div>
 
+    <% if Spree::Frontend::Config[:coupon_codes_enabled] %>
       <%= form_for @order, url: update_checkout_path(@order.state), html: { id: "coupon_code" }, remote: true do |form| %>
       <div class="grid" id="discount-apply">
           <div class="form-group has-float-label">
             <%= form.text_field :coupon_code, placeholder: "#{Spree.t(:coupon_code)}", class: 'form-control', id: 'coupon_box' %>
             <%= form.label Spree.t(:coupon_code) %>
-            <%= button_tag Spree.t(:coupon_code_apply), class: 'btn btn-default', id: 'coupon_button' %>
+            <%= button_tag Spree.t(:coupon_code_apply), class: 'coupon_button btn btn-default' %>
           </div>
       </div>
       <% end %>
-
+    <% end %>
 
     <div id="subtotal-line" class="line-items" data-hook="order_summary">
           <div class="text-left"><strong><%= Spree.t(:subtotal) %></strong></div>
@@ -100,7 +106,7 @@
         </div>
         <div id="total" class="text-right">
           <strong>
-            <span id='summary-order-total' data-currency="<%= Money::Currency.find(order.currency).symbol %>"><%= order.display_total.to_html %></span>
+            <span class= "order-total" id='summary-order-total' data-currency="<%= Money::Currency.find(order.currency).symbol %>"><%= order.display_total.to_html %></span>
           </strong><br />
           <span class="total-tax"><%= Spree.t(:currency)%>: <%= current_currency %></span>
         </div>

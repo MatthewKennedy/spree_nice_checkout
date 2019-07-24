@@ -1,4 +1,5 @@
 <% @body_id = 'checkout-page' %>
+
 <div id="mobile-logo">
   <div style='max-width:140px; margin: 0px auto 5px; text-align:center;'>
     <%= logo %>
@@ -14,7 +15,24 @@
       <div id="checkout-progress" data-hook="checkout_header">
         <%= checkout_progress %>
       </div>
-
+    <%= render partial: 'spree/checkout/info' %>
+    <% if @order.state == 'payment' %>
+    <div id="payment_additional_discount_box">
+      <h4><%= Spree.t(:coupon_code) %></h4>
+      <% if Spree::Frontend::Config[:coupon_codes_enabled] %>
+        <%= form_for @order, url: update_checkout_path(@order.state), html: { id: "coupon_code_pay" }, remote: true do |form| %>
+        <div id="discount-apply_pay">
+            <div class="form-group has-float-label">
+              <%= form.text_field :coupon_code, placeholder: "#{Spree.t(:coupon_code)}", class: 'form-control', id: 'coupon_box_pay' %>
+              <%= form.label Spree.t(:coupon_code) %>
+              <%= button_tag Spree.t(:coupon_code_apply), class: 'coupon_button btn btn-default' %>
+            </div>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+    <% end %>
+<div class="grid">
       <%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
       <%= form_for @order, url: update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form| %>
 
@@ -27,7 +45,7 @@
       <% else %>
         <div class="contact_login">
           <h4 class="_fr2"><%= Spree.t(:contact_information) %></h4>
-          <span class="text-right grey"><span class="small_hide"><%= Spree.t(:already_have_an_acount) %> </span><%= link_to Spree.t(:login), spree.registration_path %></span>
+          <span class="text-right grey" data-custom-open="modal-1"><span class="small_hide"><%= Spree.t(:already_have_an_acount) %> </span><%= Spree.t(:login) %></span>
         </div>
         <div class="has-float-label">
           <%= form.email_field :email, placeholder: "#{Spree.t(:email)}", class: 'form-control', required: true %>
@@ -39,7 +57,7 @@
     <%= form.hidden_field :state_lock_version %>
       <%= render @order.state, form: form %>
     <% end %>
-
+</div>
       <div id="checkout-footer">
         <a aria-haspopup="dialog" data-modal="policy-992873" data-title-text="Refund policy" data-close-text="Close" data-iframe="true" href="/2676031/policies/992873.html">Refund policy</a>
         <a aria-haspopup="dialog" data-modal="policy-992875" data-title-text="Privacy policy" data-close-text="Close" data-iframe="true" href="/2676031/policies/992875.html">Privacy policy</a>
@@ -61,3 +79,5 @@
   new BadgerAccordion('.js-badger-accordion', {
   });
 </script>
+
+<%= render partial: 'spree/checkout/login' %>

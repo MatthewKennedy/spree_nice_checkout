@@ -1,0 +1,60 @@
+
+<% if @order.state == 'delivery' %>
+  <div id="checkout-so-far">
+    <div class="tag grey">
+      <%= Spree.t(:contact) %>
+    </div>
+    <div class="info">
+      <%= @order.email%>
+    </div>
+    <div class="link text-right">
+      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+    </div>
+    <span class="fw border-top"></span>
+    <div class="tag grey">
+      <%= Spree.t(:ship_to) %>
+    </div>
+    <div class="info ">
+      <%= @order.shipping_address.address1 %>, <%= @order.shipping_address.city %>, <%= @order.shipping_address.zipcode %>, <%= @order.shipping_address.country %>
+    </div>
+    <div class="link text-right">
+      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+    </div>
+  </div>
+<% end %>
+
+<% if @order.state == 'payment' %>
+  <div id="checkout-so-far">
+    <div class="tag grey">
+      <%= Spree.t(:contact) %>
+    </div>
+    <div class="info">
+      <%= @order.email%>
+    </div>
+    <div class="link text-right">
+      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+    </div>
+    <span class="fw border-top"></span>
+    <div class="tag grey">
+      <%= Spree.t(:ship_to) %>
+    </div>
+    <div class="info ">
+      <%= @order.billing_address.address1 %>, <%= @order.billing_address.city %>, <%= @order.billing_address.zipcode %>, <%= @order.billing_address.country %>
+    </div>
+    <div class="link text-right">
+      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+    </div>
+    <span class="fw border-top"></span>
+    <div class="tag grey">
+      <%= Spree.t(:method) %>
+    </div>
+    <div class="info ">
+      <% @order.shipments.each do |shipment| %>
+      <%= shipment.shipping_method.name %>
+      <% end %>
+    </div>
+    <div class="link text-right">
+      <%= link_to Spree.t(:change), spree.checkout_state_path('delivery') %>
+    </div>
+  </div>
+<% end %>
