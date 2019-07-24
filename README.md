@@ -1,12 +1,19 @@
 # SpreeNiceCheckout
 
-Introduction goes here.
+This Spree extension adds a Shopify style checkout to your Spree 3.7 store. Why?
+- If you have recently moved from Shopify your existing customers won't notice a huge change.
+- Shopify is so wieldy used, so much so that a large percentage of people know the Shopify checkout flow and feel reassured.
+- Bypass the default spree registration step that interrupts the checkout flow from cart to checkout.
+
+## ToDo
+1. Discounts need ajax updating when applied.
+2. Login needs to be more seamless, it currently redirects you back to the homepage if successful and adds the items in cart to any that the user had from last session. Ideally, if a login is successful from the checkout login from, the user should be redirected back to the checkout/address stage, and if the user had an existing order in the users  session from a previous visit, rater than adding all items onto the order, it would be better to update the order to only the items that the user was checking out with prior to logging in, this saves any back tracking to the cart stage to amend the order.
 
 ## Installation
 
 1. Add this extension to your Gemfile with this line:
   ```ruby
-  gem 'spree_nice_checkout', github: '[your-github-handle]/spree_nice_checkout'
+  gem 'spree_nice_checkout', github: 'matthewkennedy/spree_nice_checkout'
   ```
 
 2. Install the gem using Bundler:
