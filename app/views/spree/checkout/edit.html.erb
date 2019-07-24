@@ -1,20 +1,18 @@
 <% @body_id = 'checkout-page' %>
 
-<div id="mobile-logo">
-  <div style='max-width:140px; margin: 0px auto 5px; text-align:center;'>
-    <%= logo %>
+<div id="checkout-header">
+  <div class="inner-section-right">
+    <div style='max-width:140px; margin: 0px auto 5px; text-align:center;'>
+      <%= logo %>
+    </div>
+    <div id="checkout-progress" data-hook="checkout_header">
+      <%= checkout_progress %>
+    </div>
   </div>
 </div>
+
 <div id="checkout-main">
-  <div id="inner-section-right">
-      <div id="checkout-header">
-        <div style='max-width:140px; margin: 0px auto 5px; text-align:center;'>
-          <%= logo %>
-        </div>
-      </div>
-      <div id="checkout-progress" data-hook="checkout_header">
-        <%= checkout_progress %>
-      </div>
+  <div class="inner-section-right">
     <%= render partial: 'spree/checkout/info' %>
     <% if @order.state == 'payment' %>
     <div id="payment_additional_discount_box">
@@ -45,7 +43,7 @@
       <% else %>
         <div class="contact_login">
           <h4 class="_fr2"><%= Spree.t(:contact_information) %></h4>
-          <span class="text-right grey" data-custom-open="modal-1"><span class="small_hide"><%= Spree.t(:already_have_an_acount) %> </span><%= Spree.t(:login) %></span>
+          <span class="text-right grey" data-custom-open="modal-1"><span class="small_hide"><%= Spree.t(:already_have_an_acount) %> </span><span class="link_color"><%= Spree.t(:login) %></span></span>
         </div>
         <div class="has-float-label">
           <%= form.email_field :email, placeholder: "#{Spree.t(:email)}", class: 'form-control', required: true %>
@@ -67,7 +65,7 @@
 </div>
 
 <% if @order.state != 'confirm' %>
-    <div id="checkout-summary" class="js-badger-accordion" data-hook="checkout_summary_box">
+    <div id="checkout-summary" class="js-badger-accordion inner-section-left" data-hook="checkout_summary_box">
           <%= render partial: 'summary', locals: { order: @order } %>
     </div>
 <% end %>
@@ -75,9 +73,9 @@
 <script>
   Spree.current_order_id = "<%= @order.number %>"
   Spree.current_order_token = "<%= @order.token %>"
-
   new BadgerAccordion('.js-badger-accordion', {
   });
 </script>
-
-<%= render partial: 'spree/checkout/login' %>
+<% if @order.state == 'address' %>
+  <%= render partial: 'spree/checkout/login' %>
+<% end %>

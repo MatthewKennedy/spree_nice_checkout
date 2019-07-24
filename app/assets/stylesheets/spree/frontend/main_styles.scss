@@ -13,10 +13,6 @@ $color-error-bg:red;
 $button-corner-radius: $corner-radius;
 $colum-padding:80px 40px 0 40px;
 
-
-
-
-
 /*============================================================================
   Prefix mixin for generating vendor prefixes.
   Based on https://github.com/thoughtbot/bourbon/blob/v4-stable/app/assets/stylesheets/addons/_prefixer.scss
@@ -53,6 +49,14 @@ $colum-padding:80px 40px 0 40px;
 }
 
 body#checkout-page {
+
+  .link_color {
+    color:$link-color ;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+
     #subtotal-line {
       font-size: 0.9em;
       margin-bottom: 0px;
@@ -108,6 +112,9 @@ body#checkout-page {
 
     span.cart-progress.completed a {
       color: $link-color;
+      &:hover{
+        text-decoration: underline;
+      }
     }
 
     span.go-back a {
@@ -146,10 +153,6 @@ body#checkout-page {
         margin-left: 7.5px;
         margin-right:7.5px;
         font-size: 0.85714em;
-        &:hover{
-          text-decoration: none;
-        }
-
       }
 
     }
@@ -278,41 +281,25 @@ body#checkout-page {
           padding: 0 55px;
         }
 
-        #content {
-          display: grid;
-          grid-template-columns: repeat(7,1fr);
-          height: 100vh;
-        }
-
         div#spree-header {
           display: none;
         }
 
 
         div#checkout-main {
-          grid-column:1/5;
           background: #ffffff;
-          border-right: 1px solid $color-border;
           padding: $colum-padding;
-        }
-
-        div#inner-section-right {
-          max-width: 800px;
-          margin-left: auto;
+          padding-top: 0;
         }
 
         div#checkout-summary {
-          grid-column:5/8;
+          border-left: 1px solid $color-border;
           background: $almost-white--background;
           background-color: $almost-white--background;
           padding: $colum-padding;
-          width:100%;
         }
 
-        div#checkout-summary-inner {
-          display: grid;
-          max-width: 600px;
-        }
+
 
         div#cart-line-items {
           display: grid;
@@ -639,6 +626,9 @@ body#checkout-page {
         color:$grey;
         /*16px width of fake checkbox + 6px distance between fake checkbox and text*/
         padding-left: 22px;
+        &:hover{
+          text-decoration: underline;
+        }
     }
 
     .checkbox label::before,
@@ -777,176 +767,157 @@ body#checkout-page {
     }
 
 
+      @media only screen and (max-width: 999px) {
 
-}
+          #payment_additional_discount_box {
+            display: grid;
+          }
+
+            .medium_down_hide {
+             display: none;
+            }
+
+            dt#accordion_show_hide{
+              display: grid;
+              max-width: 566px;
+              margin: auto;
+              height: 30px;
+              padding-left: 3px;
+              padding-right: 3px;
+            }
+
+            div#checkout-summary {
+              padding: 15px;
+              width:100%;
+              border-top: 1px solid $color-border;
+              border-bottom: 1px solid $color-border;
+              border-left: none;
+            }
+
+            div#checkout-summary-inner {
+              margin: 35px auto;
+            }
+
+            div#checkout-main {
+              padding: 15px;
+            }
+
+            div.inner-section-right {
+              max-width: 566px;
+              margin:auto;
+              padding-left: 3px;
+              padding-right: 3px;
+            }
+
+            div.inner-section-right {
+              max-width: 566px;
+              padding-left: 3px;
+              padding-right: 3px;
+            }
+
+            div#checkout-header {
+            margin-top:20px;
+            }
+
+            .with-state {
+              display: grid;
+              grid-template-columns:1fr;
+              grid-gap: 10px;
+            }
+
+            .without-state {
+              display: grid;
+              grid-template-columns: 1fr;
+              grid-gap: 10px;
+            }
+
+            .badger-accordion__panel {
+              max-height: 75vh;
+              overflow: hidden;
+              // scss-lint:disable ImportantRule
+              &.-ba-is-hidden {
+                  max-height: 0 !important;
+                  visibility: hidden;
+              }
+              // transition is added via `badger-accordion--initalised` to stop animation on initalition
+              .badger-accordion--initalised & { transition: max-height ease-in-out 0.2s; }
+            }
 
 
-@media only screen and (max-width: 999px) {
-  body#checkout-page {
+            .js-badger-accordion-header{
+              display: grid;
+              grid-template-columns: 3fr 1fr;
+              align-items: center;
+              color:$link-color;
+              padding: 5px 0;
+              text-align: left;
 
-    #payment_additional_discount_box {
-      display: grid;
-    }
+              h4 {
+                font-weight: 300;
+                position: relative;
 
-      .medium_down_hide {
-       display: none;
+              }
+
+            }
+
+            .back-or-contiue-buttons {
+              grid-template-columns: 1fr;
+              .back {
+                grid-row: 2;
+                text-align: center;
+                margin-top: 20px;
+              }
+              .continue {
+                grid-row: 1;
+              }
+            }
+
+            .hide-summary {
+              display: none;
+            }
+
+
+            .chevron:after {
+              content: asset-data-url('chevron-down');
+              display: inline-grid;
+              width: 12px;
+              margin-right:6px;
+              transition: all ease-in-out 0.2s;
+            }
+
+            .-ba-is-active .chevron:after {
+              -webkit-transform: scaleY(-1);
+              transform: scaleY(-1);
+              transition: all ease-in-out 0.2s;
+            }
+
+            .-ba-is-active .show-summary {
+              display: none;
+            }
+
+            .-ba-is-active .hide-summary {
+              display: inline;
+            }
+
+
+
+            .badger-accordion--initialized .badger-accordion__panel {
+              transition: all ease-in-out 0.2s;
+            }
+
+            .badger-accordion__trigger-icon {
+                transition: all ease-in-out .2s;
+            }
+
+
       }
 
-      dt#accordion_show_hide{
-        display: grid;
-        max-width: 566px;
-        margin: auto;
-        height: 30px;
-        padding-left: 3px;
-        padding-right: 3px;
-      }
+      @media only screen and (max-width: 550px) {
 
-      div#mobile-logo{
-        display: grid;
-        grid-column:1/8;
-        grid-row: 1;
-        background: #ffffff;
-        padding: 15px;
-      }
-
-      div#checkout-summary {
-        grid-column:1/8;
-        grid-row: 2;
-        background: $almost-white--background;
-        background-color: $almost-white--background;
-        padding: 15px;
-        width:100%;
-        border-top: 1px solid $color-border;
-        border-bottom: 1px solid $color-border;
-      }
-
-      div#checkout-summary-inner {
-        display: grid;
-        max-width: 566px;
-        margin: 35px auto;
-        padding-left: 3px;
-        padding-right: 3px;
-      }
-
-      div#checkout-main {
-        grid-column:1/8;
-        grid-row: 3;
-        background: #ffffff;
-        border-right: none;
-        padding: 15px;
-      }
-
-      div#inner-section-right {
-        max-width: 566px;
-        margin:auto;
-        padding-left: 3px;
-        padding-right: 3px;
-      }
-
-      div#checkout-header, div#checkout-progress {
-        display: none;
-      }
-
-      .with-state {
-        display: grid;
-        grid-template-columns:1fr;
-        grid-gap: 10px;
-      }
-
-      .without-state {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: 10px;
-      }
-
-      .badger-accordion__panel {
-        max-height: 75vh;
-        overflow: hidden;
-        // scss-lint:disable ImportantRule
-        &.-ba-is-hidden {
-            max-height: 0 !important;
-            visibility: hidden;
-        }
-        // transition is added via `badger-accordion--initalised` to stop animation on initalition
-        .badger-accordion--initalised & { transition: max-height ease-in-out 0.2s; }
-      }
-
-
-      .js-badger-accordion-header{
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-        align-items: center;
-        color:$link-color;
-        padding: 5px 0;
-        text-align: left;
-
-        h4 {
-          font-weight: 300;
-          position: relative;
-
-        }
+            .small_hide {
+             display: none;
+           }
 
       }
 
-      .back-or-contiue-buttons {
-        grid-template-columns: 1fr;
-        .back {
-          grid-row: 2;
-          text-align: center;
-          margin-top: 20px;
-        }
-        .continue {
-          grid-row: 1;
-        }
-      }
-
-      .hide-summary {
-        display: none;
-      }
-
-
-      .chevron:after {
-        content: asset-data-url('chevron-down');
-        display: inline-grid;
-        width: 12px;
-        margin-right:6px;
-        transition: all ease-in-out 0.2s;
-      }
-
-      .-ba-is-active .chevron:after {
-        -webkit-transform: scaleY(-1);
-        transform: scaleY(-1);
-        transition: all ease-in-out 0.2s;
-      }
-
-      .-ba-is-active .show-summary {
-        display: none;
-      }
-
-      .-ba-is-active .hide-summary {
-        display: inline;
-      }
-
-
-
-      .badger-accordion--initialized .badger-accordion__panel {
-        transition: all ease-in-out 0.2s;
-      }
-
-      .badger-accordion__trigger-icon {
-          transition: all ease-in-out .2s;
-      }
-
-  }
-}
-
-
-@media only screen and (max-width: 550px) {
-  body#checkout-page {
-
-      .small_hide {
-       display: none;
-     }
-
-   }
 }
