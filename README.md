@@ -6,7 +6,7 @@ This Spree extension adds a Shopify style checkout to your Spree 3.7 store. Why?
 - Bypass the default spree registration step that interrupts the checkout flow from cart to checkout.
 
 ## ToDo
-1. Discounts need ajax updating when applied.
+1. Discounts need ajax updating when applied. Currently the discounts updates via a page reload if successful, also could do with ability to remove discount code if user wishes to.
 2. Login needs to be more seamless, it currently redirects you back to the homepage if successful and adds the items in cart to any that the user had from last session. Ideally, if a login is successful from the checkout login from, the user should be redirected back to the checkout/address stage, and if the user had an existing order in the users  session from a previous visit, rater than adding all items onto the order, it would be better to update the order to only the items that the user was checking out with prior to logging in, this saves any back tracking to the cart stage to amend the order.
 
 ## Installation
