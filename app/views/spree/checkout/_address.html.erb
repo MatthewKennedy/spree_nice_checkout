@@ -35,7 +35,7 @@
 
 <div class="back-or-contiue-buttons">
   <div class="back">
-    <span class="go-back"><a href='<%= spree.cart_path %>'> <%= Spree.t(:return_to_cart) %></a></span>
+    <span class="go-back"><%= link_to Spree.t(:return_to_cart), spree.cart_path %></span>
   </div>
   <div class="continue">
      <%= submit_tag Spree.t(:continue_to_delivery), class: 'btn btn-success btn-block checkout-button' %>

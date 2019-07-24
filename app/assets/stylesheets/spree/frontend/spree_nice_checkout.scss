@@ -5,6 +5,7 @@ $button-color: #007aff;
 $grey:#717171;
 $lightgrey:#bebebe;
 $almost-white--background: #fafafa;
+$active-color: rgb(85, 129, 161);
 $corner-radius: 5px;
 $default-margin-padding:20px ;
 $color-error:red;
@@ -97,7 +98,9 @@ body#checkout-page {
 
     span.cart-progress.active{
       font-weight: 600;
-      a{color: black;}
+      a {
+        color: $active-color;
+      }
     }
 
     span.cart-progress.completed a {
@@ -112,9 +115,16 @@ body#checkout-page {
       margin: 15px 0 30px 0;
     }
 
+    .btn{
+      padding: 12.5px 5px;
+      font-weight: 500;
+    }
+
     .checkout-button {
       background-color: $button-color;
       border-color: darken( $button-color, 10% );
+      font-size: 1.2em;
+      font-weight: 400;
     }
 
     .checkout-button:hover {
@@ -153,10 +163,7 @@ body#checkout-page {
         margin: 0;
     }
 
-    .btn{
-      padding: 12.5px 5px;
-      font-weight: 600;
-    }
+
     .alert-danger,  .alert-error {
       color: #a94442;
       background-color: transparent;
@@ -353,12 +360,13 @@ body#checkout-page {
 
     div#checkout-so-far {
       display: grid;
-      grid-template-columns: 1fr 4fr 1fr;
-      grid-gap: 0px;
+      grid-template-columns: 65px auto 65px;
       align-items: center;
       border: 1px solid $color-border;
       border-radius: $corner-radius;
       padding: 0 15px;
+
+      span.fw{grid-column: 1/4;}
 
       .tag, .info, .link {
         padding: 15px 0;
@@ -423,10 +431,10 @@ body#checkout-page {
       background: {
         image: asset-data-url('chevron-down');
         repeat: no-repeat;
-        position: right 15px center;
+        position: right 7.5px center;
         size: 15px;
       }
-      padding-right: 28px;
+      padding-right: 11px;
       text-indent: 0.01px;
       text-overflow: '';
       color: #000;
@@ -512,7 +520,7 @@ body#checkout-page {
         opacity: 1;
         transition: all 0.2s;
         line-height: 1em;
-        left: 3px;
+        left: 0;
         top: 7px;
         color: #717171;
         font-weight: 200;
@@ -554,8 +562,7 @@ body#checkout-page {
         font-size: 20px;
         width: 100%;
         line-height: 1.3em;
-        padding:15px;
-        padding-top: 30px;
+        padding:30px 0 15px 12px;
         @include float-label-scaled {
           top: 0.73em;
           left: 0.5em;
@@ -587,7 +594,7 @@ body#checkout-page {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        padding:15px 35px 2px 15px;
+        padding:15px 30px 2px 11px;
       }
 
     }

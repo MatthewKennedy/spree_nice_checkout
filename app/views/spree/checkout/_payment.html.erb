@@ -7,7 +7,7 @@
       <%= @order.email%>
     </div>
     <div class="link text-right">
-      <a href="/checkout/address"><%= Spree.t(:change) %></a>
+      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
     </div>
     <span class="fw border-top"></span>
     <div class="tag grey">
@@ -17,7 +17,7 @@
       <%= @order.billing_address.address1 %>, <%= @order.billing_address.city %>, <%= @order.billing_address.zipcode %>, <%= @order.billing_address.country %>
     </div>
     <div class="link text-right">
-      <a href="/checkout/address"><%= Spree.t(:change) %></a>
+      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
     </div>
     <span class="fw border-top"></span>
     <div class="tag grey">
@@ -29,7 +29,7 @@
       <% end %>
     </div>
     <div class="link text-right">
-      <a href="/checkout/delivery"><%= Spree.t(:change) %></a>
+      <%= link_to Spree.t(:change), spree.checkout_state_path('delivery') %>
     </div>
   </div>
 
@@ -81,6 +81,7 @@
     </ul>
   </div>
 </div>
+
     <ul class="nav" id="payment-methods" data-hook>
       <% @order.available_payment_methods.each do |method| %>
         <li id="payment_method_<%= method.id %>" class="<%= 'last' if method == @order.available_payment_methods.last %>">
@@ -93,24 +94,12 @@
   </div>
 </div>
 
-<div class="grid-two-col">
-  <div class="items-center">
-    <span class="go-back"><a href='/checkout/delivery'> <%= Spree.t(:return_to_delivery) %></a></span>
-  </div>
-  <div>
-    <%= submit_tag Spree.t(:purchase), class: 'btn btn-success btn-block checkout-button' %>
-    <script>Spree.disableSaveOnClick();</script>
-  </div>
+<div class="back-or-contiue-buttons">
+   <div class="back">
+      <span class="go-back"><%= link_to Spree.t(:return_to_delivery) , spree.checkout_state_path('delivery') %></span>
+   </div>
+   <div class="continue">
+     <%= submit_tag Spree.t(:purchase), class: 'btn btn-success btn-block checkout-button' %>
+     <script>Spree.disableSaveOnClick();</script>
+   </div>
 </div>
-
-<div id="alert-helper-message" class="text-center hide"><p class="micro"><a href="#er-note" rel='modal:open'>click to learn more</a></p></div>
-<script type="text/javascript">
-  $(window).bind("load", function() {
-    $("#alert-helper-message").appendTo(".alert-error");
-    $(".alert-error").filter(":contains('The IP Address provided is invalid..')").remove()
-  });
-
-  new BadgerAccordion('.js-badger-accordion', {
-    openHeadersOnLoad: [0]
-  });
-</script>

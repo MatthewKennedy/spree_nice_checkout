@@ -9,7 +9,7 @@ en:
     inclides: includes
     accepts_marketing_emails: Keep me up to date <span class='small_hide'>on news & exclusive offers<span>
     use_billing_address: Use billing address for delivery
-    coupon_code: Enter your discont code
+    coupon_code: Enter a discount code
     change: Change
     contact: Contact
     ship_to: Ship to
