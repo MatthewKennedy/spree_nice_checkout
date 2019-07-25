@@ -36,4 +36,5 @@ Spree.ready(function ($) {
       }
     }
   })
+
 })
