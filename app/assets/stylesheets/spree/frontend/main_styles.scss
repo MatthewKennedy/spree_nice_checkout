@@ -194,7 +194,7 @@ body#checkout-page {
 
 
     #coupon_status {
-      font-size: 16px;
+      font-size: 12px;
     }
 
     img{max-width: 100%;}
@@ -809,7 +809,7 @@ body#checkout-page {
             }
 
             div#checkout-summary-inner {
-              margin: 35px auto;
+              margin: 35px auto 0 auto;
             }
 
             div#checkout-main {
@@ -846,7 +846,7 @@ body#checkout-page {
             }
 
             .badger-accordion__panel {
-              max-height: 75vh;
+            
               overflow: hidden;
               // scss-lint:disable ImportantRule
               &.-ba-is-hidden {

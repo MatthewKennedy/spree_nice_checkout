@@ -12,7 +12,7 @@ CouponManager.prototype.applyCoupon = function () {
       this.couponStatus = $('<div/>', {
         id: 'coupon_status'
       })
-      this.couponCodeField.parent().append(this.couponStatus)
+      this.couponCodeField.parent().after(this.couponStatus)
     }
     this.couponStatus.removeClass()
     this.sendRequest()
@@ -36,11 +36,14 @@ CouponManager.prototype.sendRequest = function () {
     }
   }).done(function () {
     this.couponCodeField.val('')
-    this.couponStatus.addClass('alert-success').html(Spree.translations.coupon_code_applied)
+    this.couponCodeField.addClass('alert-success')
     this.couponApplied = true
     window.location.reload(true);
+
   }.bind(this)).fail(function (xhr) {
     var handler = xhr.responseJSON
-    this.couponStatus.addClass('alert-error').html(handler['error'])
+    this.couponCodeField.val('')
+    this.couponCodeField.addClass('alert-error')
+    this.couponStatus.html(handler['error'])
   }.bind(this))
 }

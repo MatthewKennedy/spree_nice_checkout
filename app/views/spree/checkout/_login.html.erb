@@ -32,7 +32,15 @@
               </div>
             </fieldset>
           <% end %>
+          <div class="text-center">
+            <%= Spree.t(:or) %>
+          </div>
+          <div class="text-center">
+                <%= link_to Spree.t(:create_a_new_account), spree.signup_path %> |
+                <%= link_to Spree.t(:forgot_password), spree.recover_password_path %>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
