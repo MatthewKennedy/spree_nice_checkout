@@ -75,6 +75,12 @@
   Spree.current_order_token = "<%= @order.token %>"
   new BadgerAccordion('.js-badger-accordion', {
   });
+
+  $(function() {
+    setTimeout(function(){
+      $('.alert').fadeOut(800);
+    }, 4000);
+  });
 </script>
 <% if @order.state == 'address' %>
   <%= render partial: 'spree/checkout/login' %>

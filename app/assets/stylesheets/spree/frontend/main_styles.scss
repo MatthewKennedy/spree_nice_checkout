@@ -50,6 +50,29 @@ $colum-padding:80px 40px 0 40px;
 
 body#checkout-page {
 
+
+  div.alert{
+    position: fixed;
+    top: 0;
+    width: auto;
+    margin: 15px;
+    left: 0;
+    z-index: 99;
+    text-align: left;
+    border-radius: 0;
+  }
+
+  .alert-danger,  .alert-error {
+    border: 2px dashed #c33043;
+    color: #971b31;
+    background-color: #fbe5e7;
+  }
+  .alert-success {
+    border: 2px dashed #52ca29;
+    color: #3c763d;
+    background-color: rgb(244, 247, 233);
+  }
+
   .link_color {
     color:$link-color ;
     &:hover{
@@ -170,17 +193,8 @@ body#checkout-page {
     }
 
 
-    .alert-danger,  .alert-error, .alert-success {
-      background-color: transparent;
-      border: none;
-    }
-    .alert-danger,  .alert-error {
-      color: #a94442;
-    }
-
-
     #coupon_status {
-      font-size: 16px;
+      font-size: 12px;
     }
 
     img{max-width: 100%;}
@@ -795,7 +809,7 @@ body#checkout-page {
             }
 
             div#checkout-summary-inner {
-              margin: 35px auto;
+              margin: 35px auto 0 auto;
             }
 
             div#checkout-main {
@@ -832,7 +846,7 @@ body#checkout-page {
             }
 
             .badger-accordion__panel {
-              max-height: 75vh;
+            
               overflow: hidden;
               // scss-lint:disable ImportantRule
               &.-ba-is-hidden {
