@@ -11,6 +11,7 @@ en:
     use_billing_address: Use billing address for delivery
     coupon_code: Enter a discount code
     change: Change
+    contact_information: Contact Information
     contact: Contact
     ship_to: Ship to
     method: Method

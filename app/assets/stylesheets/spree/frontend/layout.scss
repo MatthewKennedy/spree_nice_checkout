@@ -2,6 +2,9 @@ body#checkout-page {
 
         div#content  {
         display: grid;
+        margin: 0 !important;
+        padding:0 !important;
+        height: 100vh;
         grid-template-rows: 1fr;
         grid-template-columns:100%;
         grid-template-areas: "head"
@@ -25,7 +28,7 @@ body#checkout-page {
       @media only screen and (min-width: 1000px) {
             div#content {
               grid-template-columns: 60% 40%;
-              grid-template-rows: 80px;
+              grid-template-rows: 80px 70px 40px 40px;
               grid-template-areas:
               "main summary";
             }
@@ -50,14 +53,16 @@ body#checkout-page {
               grid-column: 2 / 2;
             }
 
-            div.inner-section-right {
-              max-width: 800px;
+            div.inner-section-left{
+              max-width:800px;
               margin-left: auto;
             }
-            div.inner-section-left{
-              display: grid;
-              max-width: 600px;
+            
+            div.inner-section-right {
+              max-width:600px;
+              margin-right: auto;
             }
+
 
       }
 }

@@ -1,7 +1,7 @@
 <% @body_id = 'checkout-page' %>
 
 <div id="checkout-header">
-  <div class="inner-section-right">
+  <div class="inner-section-left">
     <div style='max-width:140px; margin: 0px auto 5px; text-align:center;'>
       <%= logo %>
     </div>
@@ -12,7 +12,7 @@
 </div>
 
 <div id="checkout-main">
-  <div class="inner-section-right">
+  <div class="inner-section-left">
     <%= render partial: 'spree/checkout/info' %>
     <% if @order.state == 'payment' %>
     <div id="payment_additional_discount_box">
@@ -65,7 +65,7 @@
 </div>
 
 <% if @order.state != 'confirm' %>
-    <div id="checkout-summary" class="js-badger-accordion inner-section-left" data-hook="checkout_summary_box">
+    <div id="checkout-summary" class="js-badger-accordion" data-hook="checkout_summary_box">
           <%= render partial: 'summary', locals: { order: @order } %>
     </div>
 <% end %>
