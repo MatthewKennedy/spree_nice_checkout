@@ -373,7 +373,7 @@ body#checkout-page {
 
     div#checkout-so-far {
       display: grid;
-      grid-template-columns: 65px auto 65px;
+      grid-template-columns: minmax(0px, 60px) minmax(0, auto) minmax(65px, 85px);
       align-items: center;
       border: 1px solid $color-border;
       border-radius: $corner-radius;
