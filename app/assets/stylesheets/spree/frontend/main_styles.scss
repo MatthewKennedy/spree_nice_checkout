@@ -302,7 +302,7 @@ body#checkout-page {
         }
 
 
-        div#checkout-main {
+        div#checkout {
           background: #ffffff;
           padding: $colum-padding;
           padding-top: 0;
@@ -815,22 +815,17 @@ body#checkout-page {
               margin: 35px auto 0 auto;
             }
 
-            div#checkout-main {
+            div#checkout {
               padding: 15px;
             }
 
-            div.inner-section-right {
+            .inner-section-right, .inner-section-left {
               max-width: 566px;
               margin:auto;
               padding-left: 3px;
               padding-right: 3px;
             }
 
-            div.inner-section-right {
-              max-width: 566px;
-              padding-left: 3px;
-              padding-right: 3px;
-            }
 
             div#checkout-header {
             margin-top:20px;

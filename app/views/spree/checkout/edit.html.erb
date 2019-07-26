@@ -11,7 +11,13 @@
   </div>
 </div>
 
-<div id="checkout-main">
+<% if @order.state != 'confirm' %>
+    <div id="checkout-summary" class="js-badger-accordion" data-hook="checkout_summary_box">
+          <%= render partial: 'summary', locals: { order: @order } %>
+    </div>
+<% end %>
+
+<div id="checkout">
   <div class="inner-section-left">
     <%= render partial: 'spree/checkout/info' %>
     <% if @order.state == 'payment' %>
@@ -63,12 +69,6 @@
       </div>
     </div>
 </div>
-
-<% if @order.state != 'confirm' %>
-    <div id="checkout-summary" class="js-badger-accordion" data-hook="checkout_summary_box">
-          <%= render partial: 'summary', locals: { order: @order } %>
-    </div>
-<% end %>
 
 <script>
   Spree.current_order_id = "<%= @order.number %>"

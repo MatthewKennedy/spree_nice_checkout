@@ -1,34 +1,17 @@
 body#checkout-page {
-
         div#content  {
-        display: grid;
+        display: block;
         margin: 0 !important;
         padding:0 !important;
         height: 100vh;
-        grid-template-rows: 1fr;
-        grid-template-columns:100%;
-        grid-template-areas: "head"
-                             "summary"
-                             "main"
-                             "footer"
       }
-
-      div#checkout-header {
-        grid-area: head;
-      }
-      div#checkout-main {
-        grid-area: main;
-      }
-      div#checkout-summary {
-        grid-area: summary;
-        padding: 20px 0 20px 0px;
-      }
-
 
       @media only screen and (min-width: 1000px) {
             div#content {
+              display: grid;
+
               grid-template-columns: 60% 40%;
-              grid-template-rows: 80px 70px 40px 40px;
+              grid-template-rows: 80px 70px 40px 40px ;
               grid-template-areas:
               "main summary";
             }
@@ -37,9 +20,10 @@ body#checkout-page {
               grid-area: head;
               grid-row: 2 / 3;
               grid-column: 1 / 1;
+              height: auto;
             }
 
-            div#checkout-main {
+            div#checkout {
               // margin-top:100px;
               padding-top:0;
               grid-area: main;
@@ -52,12 +36,10 @@ body#checkout-page {
               grid-row: 1 / 9;
               grid-column: 2 / 2;
             }
-
             div.inner-section-left{
               max-width:800px;
               margin-left: auto;
             }
-            
             div.inner-section-right {
               max-width:600px;
               margin-right: auto;
