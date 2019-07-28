@@ -52,8 +52,9 @@
           <span class="text-right grey" data-custom-open="modal-1"><span class="small_hide"><%= Spree.t(:already_have_an_acount) %> </span><span class="link_color"><%= Spree.t(:login) %></span></span>
         </div>
         <div class="has-float-label">
-          <%= form.email_field :email, placeholder: "#{Spree.t(:email)}", class: 'form-control', required: true %>
+          <%= form.email_field :email, placeholder: "#{Spree.t(:email)}", class: 'form-control', id: 'email', required: true %>
           <%= form.label :email %>
+          <span id="result"></span>
         </div>
       <% end %>
     <% end %>
