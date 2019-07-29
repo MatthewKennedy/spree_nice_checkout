@@ -1,5 +1,6 @@
 en:
   spree:
+    adjustments_deleted: Coupon removed
     continue_to_delivery: Continue to delivery
     continue_to_payment: Continue to payment
     return_to_cart: Return to cart
@@ -17,3 +18,4 @@ en:
     method: Method
     purchase: Pay now
     already_have_an_acount: Have an account?
+    remove_promotion: Remove promotion

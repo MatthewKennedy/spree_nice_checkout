@@ -38,7 +38,12 @@ CouponManager.prototype.sendRequest = function () {
     this.couponCodeField.val('')
     this.couponCodeField.addClass('alert-success')
     this.couponApplied = true
-    window.location.reload(true);
+    
+    return $.ajax({
+      url: Spree.pathFor('summary_adjustments')
+    }).done(function (data) {
+      return $('.summary_adjustments').html(data)
+    })
 
   }.bind(this)).fail(function (xhr) {
     var handler = xhr.responseJSON
