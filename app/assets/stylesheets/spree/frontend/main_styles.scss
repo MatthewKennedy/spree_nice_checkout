@@ -65,12 +65,12 @@ body#checkout-page {
   }
 
   .alert-danger,  .alert-error {
-    border: 2px dashed #c33043;
+    border: 1px solid #c33043;
     color: #971b31;
     background-color: #fbe5e7;
   }
   .alert-success {
-    border: 2px dashed #52ca29;
+    border: 1px solid #52ca29;
     color: #3c763d;
     background-color: rgb(244, 247, 233);
   }
@@ -913,6 +913,9 @@ body#checkout-page {
 
 
 
+
+
+
             .badger-accordion--initialized .badger-accordion__panel {
               transition: all ease-in-out 0.2s;
             }
@@ -920,6 +923,31 @@ body#checkout-page {
             .badger-accordion__trigger-icon {
                 transition: all ease-in-out .2s;
             }
+
+            div.js-badger-accordion-header .summary_adjustments div#subtotal-line,
+            div.js-badger-accordion-header .summary_adjustments .line-items,
+            div.js-badger-accordion-header .summary_adjustments .text-left,
+            div.js-badger-accordion-header .summary_adjustments .total-tax {
+              display: none;
+            }
+
+            div.js-badger-accordion-header .summary_adjustments div#order-total-line {
+              display: inline-block;
+              border: none;
+              margin: 0;
+              padding: 0;
+
+            }
+
+            div.js-badger-accordion-header .summary_adjustments #summary-order-total {
+              font-size: 18px;
+              font-weight:bold;
+
+            }
+
+
+
+
 
 
       }

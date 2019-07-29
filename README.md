@@ -6,7 +6,8 @@ This Spree extension adds a Shopify style checkout to your Spree 3.7 store. Why?
 - Bypass the default spree registration step that interrupts the checkout flow from cart to checkout.
 
 ## ToDo
-1. Discounts need ajax updating when applied. Currently the discounts updates via a page reload if successful, also could do with ability to remove discount code if user wishes to.
+1. Ajax discounts only adjusts the displayed tax amount if tax rate is not included in price, but if tax rate is included in price the rate is not updated.
+
 
 ## Installation
 

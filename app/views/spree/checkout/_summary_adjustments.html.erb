@@ -5,19 +5,11 @@
 
 <% if order.line_item_adjustments.nonzero.promotion.exists? || order.adjustments.nonzero.eligible.exists? %>
     <div class="line-items" data-hook="order_summary">
-        <% if order.line_item_adjustments.nonzero.exists? %>
-            <% order.line_item_adjustments.nonzero.promotion.eligible.group_by(&:label).each do |label, adjustments| %>
-                <div class="text-left"><%= label %></div>
-                <div class="text-right"><%= Spree::Money.new(adjustments.sum(&:amount), currency: order.currency) %></div>
-            <% end %>
-        <% end %>
-
-        <% if order.adjustments.nonzero.eligible.exists? %>
-            <% order.adjustments.nonzero.eligible.each do |adjustment| %>
-            <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+        <% if order.line_item_adjustments.nonzero.promotion.exists? %>
+            <% order.line_item_adjustments.nonzero.eligible.each do |adjustment| %>
+            <% next if (adjustment.source_type == 'Spree::TaxRate') || (adjustment.amount == 0) %>
                 <div class="text-left">
-                    <%= adjustment.label %>
-                    <%= link_to Spree.t(:remove_promotion), remove_coupon_path(id: adjustment.id), class: "remove_coupon", method: :delete, remote: true %>
+                  <%= link_to Spree.t(:remove_promotion).html_safe, remove_coupon_path(id: adjustment.id), class: "remove_coupon", method: :delete, remote: true %> <%= adjustment.label %>
                 </div>
                 <div class="text-right"><%= adjustment.display_amount %></div>
             <% end %>
@@ -30,7 +22,7 @@
     </div>
 <% end %>
 
-<% if order.passed_checkout_step?("address") && order.shipments.any? %>
+<% if order.shipments.any? %>
     <div class="line-items" data-hook="order_summary">
         <div class="text-left">
             <%= Spree.t(:shipping) %>
@@ -51,7 +43,7 @@
     <div class="text-left"><strong><%= Spree.t(:order_total) %>:</strong><br />
         <% order.all_adjustments.nonzero.tax.eligible.group_by(&:label).each do |label, adjustments| %>
         <span class="total-tax" data-hook="order_details_tax_adjustments">
-            <%= Spree.t(:including) %> <%= Spree::Money.new(adjustments.sum(&:amount), currency: order.currency).to_html %> <%= Spree.t(:in_taxes) %>
+            <%= Spree.t(:including) %> <span class="tax-amount"><%= Spree::Money.new(adjustments.sum(&:amount), currency: order.currency).to_html %></span> <%= Spree.t(:in_taxes) %>
         </span>
         <% end %>
     </div>
