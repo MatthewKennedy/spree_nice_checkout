@@ -27,14 +27,12 @@
         <div class="text-left">
             <%= Spree.t(:shipping) %>
         </div>
-        <% shipping_total = Spree::Money.new(order.shipments.to_a.sum(&:cost), currency: order.currency) %>
-        <div class="text-right" data-hook='shipping-total' data-currency='<%= Money::Currency.find(order.currency).symbol %>' thousands-separator='<%= shipping_total.thousands_separator %>' decimal-mark='<%= shipping_total.decimal_mark %>'><%= shipping_total %></div>
-
-        <% if order.shipment_adjustments.nonzero.exists? %>
-        <% order.shipment_adjustments.nonzero.promotion.eligible.group_by(&:label).each do |label, adjustments| %>
-            <div class="text-left"><%= label %>:</div>
-            <div class="text-right"><%= Spree::Money.new(adjustments.sum(&:amount), currency: order.currency) %></div>
-        <% end %>
+        <% if order.shipment_adjustments.promotion.exists? %>
+          <% shipping_total = 'FREE' %>
+            <div class="text-right"><%= shipping_total %></div>
+        <% else %>
+          <% shipping_total = Spree::Money.new(order.shipments.to_a.sum(&:cost), currency: order.currency) %>
+            <div class="text-right" data-hook='shipping-total' data-currency='<%= Money::Currency.find(order.currency).symbol %>' thousands-separator='<%= shipping_total.thousands_separator %>' decimal-mark='<%= shipping_total.decimal_mark %>'><%= shipping_total %></div>
         <% end %>
     </div>
 <% end %>

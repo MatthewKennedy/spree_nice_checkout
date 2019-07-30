@@ -6,7 +6,11 @@ This Spree extension adds a Shopify style checkout to your Spree 3.7 store. Why?
 - Bypass the default spree registration step that interrupts the checkout flow from cart to checkout.
 
 ## ToDo
-1. Ajax discounts only adjusts the displayed tax amount if tax rate is not included in price, but if tax rate is included in price the amount is not updated until the next page of checkout.
+1. Ajax discounts only adjusts the displayed tax amount if tax rate is not included in price, but if tax rate is included in price the amount is not updated until the next page of checkout
+
+2. Add Auto country selection to address form via geo detection.
+
+3.
 
 
 ## Installation

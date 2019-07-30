@@ -1,15 +1,1 @@
-$(".summary_adjustments")
-  .hide()
-  .html(
-    "<%= j render partial: 'summary_adjustments', locals: { order: current_order } %>"
-  )
-  .fadeIn("slow");
-
-$("#coupon_box")
-  .parent()
-  .parent()
-  .find(".coupon_status")
-  .delay("2000")
-  .fadeOut("slow", function() {
-    $(this).remove();
-  });
+$(".summary_adjustments").hide().html("<%= j render partial: 'summary_adjustments', locals: { order: current_order } %>").fadeIn("slow");
