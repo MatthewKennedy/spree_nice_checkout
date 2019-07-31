@@ -2,11 +2,19 @@
 
 This Spree extension adds a Shopify style checkout to your Spree 3.7 store. Why?
 - If you have recently moved from Shopify your existing customers won't notice a huge change.
-- Shopify is so wieldy used, so much so that a large percentage of people know the Shopify checkout flow and feel reassured.
+- Shopify is so wieldy used, so much so that a large percentage of people recognise the Shopify checkout flow and feel reassured to see it.
 - Bypass the default spree registration step that interrupts the checkout flow from cart to checkout.
 
-## ToDo
-2. Add Auto country setting to checkout address form via geo detection. (make stores feel native to shopper.)
+## Benefits
+- Auto set country at address stage from the visitors geo location, this defaults to use the geocoder gem, but if you use CloudFlare you can use the geo location header, there is no delay using the CloudFlare method where as the geocoder gem occasionally has a delay loading data.
+- Ajax discount codes, allows user to add/remove discount codes with ease.
+
+## Things To Be Aware Of
+- Overrides the default spree merge cart behaviour, with this checkout the current cart is respected if the user logs in at checkout.
+- Built using css grid, the desktop view might not display great on old browsers.
+
+## ToDos
+1. Add Ajax shipping method selection auto.
 
 
 ## Installation
