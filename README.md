@@ -34,9 +34,9 @@ This Spree extension adds a Shopify style checkout to your Spree 3.7 store. Why?
   bundle exec rails g spree_nice_checkout:install
   ```
 
-4. Delete checkout and address folder from your spree views folder so the extension views will override.
+4. Delete **checkout** and **address** folders from your existing spree views folder so the extension views will override.
 
-  If your server was running, restart it so that it can find the assets properly.
+5. If your server was running, restart it so that it can find the assets properly.
 
 ## Testing
 
