@@ -14,7 +14,7 @@ This Spree extension adds a Shopify style checkout to your Spree 3.7 store. Why?
 - Built using css grid, the desktop view might not display great on old browsers.
 
 ## ToDos
-1. Add Ajax shipping method selection auto.
+1. Add Ajax shipping method selection.
 
 
 ## Installation
