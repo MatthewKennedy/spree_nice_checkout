@@ -64,6 +64,5 @@
       <%= submit_tag Spree.t(:continue_to_payment), class: 'btn btn-success btn-block checkout-button' %>
    </div>
 </div>
-<% unless @order.shipment_adjustments.nonzero.promotion.exists? %>
+
   <%= javascript_include_tag 'spree/frontend/checkout/shipment' %>
-<% end %>

@@ -65,6 +65,8 @@ body#checkout-page {
     margin: 0;
   }
 
+  hr { border-color: $color-border;}
+
   div.alert{
     position: fixed;
     top: 0;

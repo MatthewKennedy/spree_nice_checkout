@@ -38,22 +38,7 @@
             <div data-hook="order_item_total" class="text-right"><%= item.display_amount %></div>
         <% end %>
     </div>
-    <% if @order.state== 'payment' %>
     <hr />
-    <% end %>
-<% unless @order.state == 'payment' %>
-    <% if Spree::Frontend::Config[:coupon_codes_enabled] %>
-      <%= form_for @order, url: 'api_v2_storefront_cart_apply_coupon_code', html: { id: "coupon_code" }, remote: true do |form| %>
-      <div class="grid" id="discount-apply">
-          <div class="form-group has-float-label">
-            <%= form.text_field :coupon_code, placeholder: "#{Spree.t(:coupon_code)}", class: 'form-control', id: 'coupon_box' %>
-            <%= form.label Spree.t(:coupon_code) %>
-            <%= button_tag Spree.t(:coupon_code_apply), class: 'coupon_button btn btn-default' %>
-          </div>
-      </div>
-      <% end %>
-    <% end %>
-<% end %>
     <div class="summary_adjustments">
       <%= render partial: "summary_adjustments", locals: { order: order }  %>
     </div>
