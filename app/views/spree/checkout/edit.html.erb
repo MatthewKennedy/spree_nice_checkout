@@ -20,43 +20,42 @@
 <div id="checkout">
   <div class="inner-section-left">
     <%= render partial: 'spree/checkout/info' %>
-    <% if @order.state == 'payment' %>
-    <div id="payment_additional_discount_box">
-      <h4><%= Spree.t(:coupon_code) %></h4>
-      <% if Spree::Frontend::Config[:coupon_codes_enabled] %>
-        <%= form_for @order, url: update_checkout_path(@order.state), html: { id: "coupon_code_pay" }, remote: true do |form| %>
-        <div id="discount-apply_pay">
-            <div class="form-group has-float-label">
-              <%= form.text_field :coupon_code, placeholder: "#{Spree.t(:coupon_code)}", class: 'form-control', id: 'coupon_box_pay' %>
-              <%= form.label Spree.t(:coupon_code) %>
-              <%= button_tag Spree.t(:coupon_code_apply), class: 'coupon_button btn btn-default' %>
-            </div>
-        </div>
+
+    <% if @order.state == 'delivery' %>
+      <div id="payment_additional_discount_box" style="margin-bottom:50px;">
+        <% if Spree::Frontend::Config[:coupon_codes_enabled] %>
+          <%= form_for @order, url: update_checkout_path(@order.state), html: { id: "coupon_code_pay" }, remote: true do |form| %>
+          <div id="discount-apply_pay">
+              <div class="form-group has-float-label">
+                <%= form.text_field :coupon_code, placeholder: "#{Spree.t(:coupon_code)}", class: 'form-control', id: 'coupon_box_pay' %>
+                <%= form.label Spree.t(:coupon_code) %>
+                <%= button_tag Spree.t(:coupon_code_apply), class: 'coupon_button btn btn-default' %>
+              </div>
+          </div>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
     <% end %>
 <div class="grid">
-      <%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
-      <%= form_for @order, url: update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form| %>
-
-    <% if @order.state == 'address' || !@order.email? %>
-      <% if spree_current_user %>
-      <div>
-        <h4><%= Spree.t(:contact_information) %></h4>
-        <span class="grey"><%= @order.name %> (<%= @order.email%>) <%= link_to Spree.t(:logout), spree.logout_path %></span>
-      </div>
-      <% else %>
-        <div class="contact_login">
-          <h4 class="_fr2"><%= Spree.t(:contact_information) %></h4>
-          <span class="text-right grey" data-custom-open="modal-1"><span class="small_hide"><%= Spree.t(:already_have_an_acount) %> </span><span class="link_color"><%= Spree.t(:login) %></span></span>
+    <%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
+    <%= form_for @order, url: update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form| %>
+      <% if @order.state == 'address' || !@order.email? %>
+        <% if spree_current_user %>
+        <div>
+          <h4><%= Spree.t(:contact_information) %></h4>
+          <span class="grey"><%= @order.name %> (<%= @order.email%>) <%= link_to Spree.t(:logout), spree.logout_path %></span>
         </div>
-        <div class="has-float-label">
-          <%= form.email_field :email, placeholder: "#{Spree.t(:email)}", class: 'form-control', id: 'email', required: true %>
-          <%= form.label :email %>
-          <span id="result"></span>
-        </div>
-      <% end %>
+        <% else %>
+          <div class="contact_login">
+            <h4 class="_fr2"><%= Spree.t(:contact_information) %></h4>
+            <span class="text-right grey" data-custom-open="modal-1"><span class="small_hide"><%= Spree.t(:already_have_an_acount) %> </span><span class="link_color"><%= Spree.t(:login) %></span></span>
+          </div>
+          <div class="has-float-label">
+            <%= form.email_field :email, placeholder: "#{Spree.t(:email)}", class: 'form-control', id: 'email', required: true %>
+            <%= form.label :email %>
+            <span id="result"></span>
+          </div>
+        <% end %>
     <% end %>
 
     <%= form.hidden_field :state_lock_version %>
@@ -77,36 +76,32 @@
   new BadgerAccordion('.js-badger-accordion', {
   });
 
-  $(function() {
-    setTimeout(function(){
-      $('.alert').fadeOut(800);
-    }, 4000);
 
+<% if @order.state == "address"%>
+    <% unless spree_current_user  %>
+      $(function() {
+        function validateEmail(email) {
+          var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(email);
+        }
 
-    <% unless spree_current_user %>
-          function validateEmail(email) {
-                var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                return re.test(email);
-              }
+        function validate() {
+          var $result = $("#result");
+          var email = $("#email").val();
+          $result.text("");
 
-              function validate() {
-                var $result = $("#result");
-                var email = $("#email").val();
-                $result.text("");
+          if (validateEmail(email)) {
+          } else {
+            $result.text(email + " is not a valid email address");
+            $result.css("color", "red");
+            return false;
+          }
 
-                if (validateEmail(email)) {
-                } else {
-                  $result.text(email + " is not a valid email address");
-                  $result.css("color", "red");
-                  return false;
-                }
-
-              }
-              $("#address-form-button").on("click", validate);
-      <% end %>
-
-
-  });
+        }
+        $("#address-form-button").on("click", validate);
+      });
+    <% end %>
+<% end %>
 </script>
 <% if @order.state == 'address' %>
   <%= render partial: 'spree/checkout/login' %>

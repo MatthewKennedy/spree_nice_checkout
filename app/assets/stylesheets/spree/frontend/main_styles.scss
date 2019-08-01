@@ -12,6 +12,7 @@ $color-error:red;
 $color-error-bg:red;
 $button-corner-radius: $corner-radius;
 $colum-padding:80px 40px 0 40px;
+$accordian-transition-time: 0.5s;
 
 /*============================================================================
   Prefix mixin for generating vendor prefixes.
@@ -49,6 +50,17 @@ $colum-padding:80px 40px 0 40px;
 }
 
 body#checkout-page {
+
+  .summary-heading-2 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .summary-heading-1 {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
   dd {
     margin: 0;
   }
@@ -695,14 +707,11 @@ body#checkout-page {
 
     /*Adding focus styles on the outer-box of the fake checkbox*/
     .checkbox input[type="checkbox"]:focus + label::before {
-
       outline: none;
       border-color: $link-color;
       -webkit-box-shadow: 0 0 0 1px $link-color;
       box-shadow: 0 0 0 1px $link-color;
     }
-
-
 
 
 //####### RADIO BUTTON STYLES
@@ -711,9 +720,9 @@ body#checkout-page {
         position: absolute;
         left: -9999px;
     }
+
     [type="radio"]:checked + label,
-    [type="radio"]:not(:checked) + label
-    {
+    [type="radio"]:not(:checked) + label {
         position: relative;
         padding: 15px 0 15px 28px;
         cursor: pointer;
@@ -722,6 +731,7 @@ body#checkout-page {
         width: 100%;
         color: #666;
     }
+
     [type="radio"]:checked + label:before,
     [type="radio"]:not(:checked) + label:before {
         content: '';
@@ -734,6 +744,7 @@ body#checkout-page {
         border-radius: 100%;
         background: #fff;
     }
+
     [type="radio"]:checked + label:after,
     [type="radio"]:not(:checked) + label:after {
         content: '';
@@ -747,11 +758,13 @@ body#checkout-page {
         -webkit-transition: all 0.2s ease;
         transition: all 0.2s ease;
     }
+
     [type="radio"]:not(:checked) + label:after {
         opacity: 0;
         -webkit-transform: scale(0);
         transform: scale(0);
     }
+
     [type="radio"]:checked + label:after {
         opacity: 1;
         -webkit-transform: scale(1);
@@ -772,9 +785,11 @@ body#checkout-page {
       width:20%;
       float:left;
     }
+
     div#mobile-logo{
       display: none;
     }
+
     dt#accordion_show_hide{
       display: none;
     }
@@ -782,7 +797,6 @@ body#checkout-page {
     .large_show_grid {
      display: grid;
     }
-
 
       @media only screen and (max-width: 999px) {
 
@@ -826,7 +840,6 @@ body#checkout-page {
               padding-right: 3px;
             }
 
-
             div#checkout-header {
             margin-top:20px;
             }
@@ -844,17 +857,15 @@ body#checkout-page {
             }
 
             .badger-accordion__panel {
-
+              max-height: 10000px;
               overflow: hidden;
               // scss-lint:disable ImportantRule
               &.-ba-is-hidden {
                   max-height: 0 !important;
                   visibility: hidden;
               }
-              // transition is added via `badger-accordion--initalised` to stop animation on initalition
-              .badger-accordion--initalised & { transition: max-height ease-in-out 0.2s; }
-            }
 
+            }
 
             .js-badger-accordion-header{
               display: grid;
@@ -894,13 +905,13 @@ body#checkout-page {
               display: inline-grid;
               width: 12px;
               margin-right:6px;
-              transition: all ease-in-out 0.2s;
+              transition: all ease-in-out $accordian-transition-time / 2;
             }
 
             .-ba-is-active .chevron:after {
               -webkit-transform: scaleY(-1);
               transform: scaleY(-1);
-              transition: all ease-in-out 0.2s;
+              transition: all ease-in-out $accordian-transition-time / 2;
             }
 
             .-ba-is-active .show-summary {
@@ -911,18 +922,10 @@ body#checkout-page {
               display: inline;
             }
 
-
-
-
-
-
             .badger-accordion--initialized .badger-accordion__panel {
-              transition: all ease-in-out 0.2s;
+              transition: all ease-in-out $accordian-transition-time;
             }
 
-            .badger-accordion__trigger-icon {
-                transition: all ease-in-out .2s;
-            }
 
             div.js-badger-accordion-header .summary_adjustments div#subtotal-line,
             div.js-badger-accordion-header .summary_adjustments .line-items,
@@ -944,10 +947,6 @@ body#checkout-page {
               font-weight:bold;
 
             }
-
-
-
-
 
 
       }

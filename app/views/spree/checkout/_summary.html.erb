@@ -13,6 +13,7 @@
     </div>
   </div>
 </dt>
+
 <dd class="badger-accordion__panel js-badger-accordion-panel -ba-is-hidden">
   <div id="checkout-summary-inner" class="js-badger-accordion-panel-inner inner-section-right">
     <div id="cart-line-items">
@@ -37,9 +38,12 @@
             <div data-hook="order_item_total" class="text-right"><%= item.display_amount %></div>
         <% end %>
     </div>
-
+    <% if @order.state== 'payment' %>
+    <hr />
+    <% end %>
+<% unless @order.state == 'payment' %>
     <% if Spree::Frontend::Config[:coupon_codes_enabled] %>
-      <%= form_for @order, url: update_checkout_path(@order.state), html: { id: "coupon_code" }, remote: true do |form| %>
+      <%= form_for @order, url: 'api_v2_storefront_cart_apply_coupon_code', html: { id: "coupon_code" }, remote: true do |form| %>
       <div class="grid" id="discount-apply">
           <div class="form-group has-float-label">
             <%= form.text_field :coupon_code, placeholder: "#{Spree.t(:coupon_code)}", class: 'form-control', id: 'coupon_box' %>
@@ -49,7 +53,9 @@
       </div>
       <% end %>
     <% end %>
-
-    <div class="summary_adjustments"><%= render partial: "summary_adjustments", locals: { order: order }  %></div>
+<% end %>
+    <div class="summary_adjustments">
+      <%= render partial: "summary_adjustments", locals: { order: order }  %>
+    </div>
   </div>
 </dd>

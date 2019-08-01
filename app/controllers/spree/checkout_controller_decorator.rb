@@ -21,8 +21,8 @@ module Spree
     end
 
     def summary_adjustments
-      render partial: "spree/checkout/summary_adjustments", locals: { order: simple_current_order }
-      fresh_when(simple_current_order)
+      render partial: "spree/checkout/summary_adjustments", locals: { order: current_order }
+      fresh_when(current_order)
     end
 
     def update_marketing_preferences
